@@ -3,14 +3,16 @@ name: Maester Daily Tests
 on:
   push:
     branches: ["main"]
+  # Run once a day at midnight
   schedule:
-    - cron: '0 0 * * *'  # Tous les jours à minuit
+    - cron: "0 0 * * *"
+  # Allows to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 permissions:
-  id-token: write
-  contents: read
-  checks: write
+      id-token: write
+      contents: read
+      checks: write
 
 jobs:
   run-maester-tests:
@@ -31,15 +33,14 @@ jobs:
         disable_telemetry: false   # Optional: Set to true If you want telemetry information not to be logged.
         # Other inputs are available and can be reviewed in the action.yml in the Maester repository
     
-        - name: Run Maester and send to Teams
-        shell: pwsh
-        run: |
-          Install-Module Maester -Force -Scope CurrentUser
-          Import-Module Maester
-      
-          $results = Invoke-Maester -PassThru
-
-          Send-MtTeamsMessage `
-            -MaesterResults $results `
-            -TeamChannelWebhookUri "${{ secrets.TEAMS_WEBHOOK_URL }}" `
-            -Subject "Résultats des tests Maester (GitHub Actions)"
+    - name: Run Maester and send to Teams
+      shell: pwsh
+      run: |
+        Install-Module Maester -Force -Scope CurrentUser
+        Import-Module Maester
+    
+        $results = Invoke-Maester -PassThru
+        Send-MtTeamsMessage `
+          -MaesterResults $results `
+          -TeamChannelWebhookUri "${{ secrets.TEAMS_WEBHOOK_URL }}" `
+          -Subject "Résultats des tests Maester (GitHub Actions)"
