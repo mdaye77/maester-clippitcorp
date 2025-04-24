@@ -31,3 +31,4 @@ jobs:
         install_prerelease: false  # Optional: Set to true if you want to use Measter Preview Build when running tests
         disable_telemetry: false   # Optional: Set to true If you want telemetry information not to be logged.
         # Other inputs are available and can be reviewed in the action.yml in the Maester repository
+Invoke-Maester -TeamChannelWebhookUri 'https://default40714c75d51c4f39a070d401b283bd.36.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/88d670ed5846453aaa4f76ada6563ed9/triggers/manual/paths/invoke/?api-version=1&tenantId=tId&environmentName=Default-40714c75-d51c-4f39-a070-d401b283bd36&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=66j_uay7i-8og8Hmuk_eG7PCL41p1nxu7RDkydNcj64'
