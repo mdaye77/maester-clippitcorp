@@ -27,7 +27,6 @@ jobs:
           Import-Module Maester
 
           $results = Invoke-Maester `
-            -TeamChannelWebhookUri "${{ secrets.TEAMS_WEBHOOK_URL }}" `
             -include_public_tests `
             -include_exchange `
             -step_summary `
