@@ -31,15 +31,15 @@ jobs:
         disable_telemetry: false   # Optional: Set to true If you want telemetry information not to be logged.
         # Other inputs are available and can be reviewed in the action.yml in the Maester repository
     
-    - name: Run send to Teams
-    shell: pwsh
-    run: |
-        Install-Module Maester -Force -Scope CurrentUser
-        Import-Module Maester
-        Connect-Maester
-        
-        Send-MtTeamsMessage `
-        -MaesterResults $results `
-        -TeamChannelWebhookUri "${{ secrets.TEAMS_WEBHOOK_URL }}" `
-        -Subject "Résultats des tests Maester (GitHub Actions)"
+        - name: Run Maester and send to Teams
+        shell: pwsh
+        run: |
+          Install-Module Maester -Force -Scope CurrentUser
+          Import-Module Maester
+      
           $results = Invoke-Maester -PassThru
+
+          Send-MtTeamsMessage `
+            -MaesterResults $results `
+            -TeamChannelWebhookUri "${{ secrets.TEAMS_WEBHOOK_URL }}" `
+            -Subject "Résultats des tests Maester (GitHub Actions)"
