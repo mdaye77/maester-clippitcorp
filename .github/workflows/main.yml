@@ -42,25 +42,9 @@ jobs:
         -MaesterResults $results `
         -TeamChannelWebhookUri "${{ secrets.TEAMS_WEBHOOK_URL }}" `
         -Subject "Résultats des tests Maester (GitHub Actions)"
-=======
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Run Maester and send to Teams
-        shell: pwsh
-        run: |
-          Install-Module Maester -Force -Scope CurrentUser
-          Import-Module Maester
-
-          Connect-Maester `
-            -ClientId "${{ secrets.AZURE_CLIENT_ID }}" `
-            -TenantId "${{ secrets.AZURE_TENANT_ID }}" `
-            -ClientSecret "${{ secrets.AZURE_CLIENT_SECRET }}"
-      
           $results = Invoke-Maester -PassThru
 
           Send-MtTeamsMessage `
             -MaesterResults $results `
             -TeamChannelWebhookUri "${{ secrets.TEAMS_WEBHOOK_URL }}" `
             -Subject "Résultats des tests Maester (GitHub Actions)"
->>>>>>> b25ec6bb1cdbc4dfdcf0b6aa2613b1166bf4b574
