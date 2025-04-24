@@ -26,13 +26,7 @@ jobs:
           Install-Module Maester -Force -Scope CurrentUser
           Import-Module Maester
 
-          $results = Invoke-Maester `
-            -include_public_tests `
-            -include_exchange `
-            -step_summary `
-            -artifact_upload `
-            -disable_telemetry:$false `
-            -PassThru
+          $results = Invoke-Maester -PassThru
 
           Send-MtTeamsMessage `
             -MaesterResults $results `
