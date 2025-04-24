@@ -28,5 +28,6 @@ jobs:
           # Envoi du résumé à Teams
           Send-MtTeamsMessage `
             -MaesterResults $results `
-            -TeamChannelWebhookUri "${{ secrets.TEAMS_WEBHOOK_URL }}" `
-            -Subject "🔁 Envoi de test vers Teams à partir d'un fichier JSON"
+            -TeamId "${{ secrets.TEAMS_TEAM_ID }}" `
+            -TeamChannelId "${{ secrets.TEAMS_CHANNEL_ID }}" `
+            -Subject "🔁 Résultats des tests Maester (GitHub Actions)"
