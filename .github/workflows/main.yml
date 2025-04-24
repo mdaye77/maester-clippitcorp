@@ -3,22 +3,21 @@ name: Maester Daily Tests
 on:
   push:
     branches: ["main"]
-  # Run once a day at midnight
   schedule:
-    - cron: "0 0 * * *"
-  # Allows to run this workflow manually from the Actions tab
+    - cron: '0 0 * * *'  # Tous les jours à minuit
   workflow_dispatch:
 
 permissions:
-      id-token: write
-      contents: read
-      checks: write
+  id-token: write
+  contents: read
+  checks: write
 
 jobs:
   run-maester-tests:
     name: Run Maester Tests
     runs-on: ubuntu-latest
     steps:
+<<<<<<< HEAD
     - name: Run Maester action
       uses: maester365/maester@main
       with:
@@ -43,3 +42,25 @@ jobs:
         -MaesterResults $results `
         -TeamChannelWebhookUri "${{ secrets.TEAMS_WEBHOOK_URL }}" `
         -Subject "Résultats des tests Maester (GitHub Actions)"
+=======
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Run Maester and send to Teams
+        shell: pwsh
+        run: |
+          Install-Module Maester -Force -Scope CurrentUser
+          Import-Module Maester
+
+          Connect-Maester `
+            -ClientId "${{ secrets.AZURE_CLIENT_ID }}" `
+            -TenantId "${{ secrets.AZURE_TENANT_ID }}" `
+            -ClientSecret "${{ secrets.AZURE_CLIENT_SECRET }}"
+      
+          $results = Invoke-Maester -PassThru
+
+          Send-MtTeamsMessage `
+            -MaesterResults $results `
+            -TeamChannelWebhookUri "${{ secrets.TEAMS_WEBHOOK_URL }}" `
+            -Subject "Résultats des tests Maester (GitHub Actions)"
+>>>>>>> b25ec6bb1cdbc4dfdcf0b6aa2613b1166bf4b574
