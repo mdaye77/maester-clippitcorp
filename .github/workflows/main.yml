@@ -17,7 +17,7 @@ jobs:
     name: Run Maester Tests
     runs-on: ubuntu-latest
     steps:
-<<<<<<< HEAD
+      
     - name: Run Maester action
       uses: maester365/maester@main
       with:
