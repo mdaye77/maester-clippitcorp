@@ -43,8 +43,3 @@ jobs:
         -TeamChannelWebhookUri "${{ secrets.TEAMS_WEBHOOK_URL }}" `
         -Subject "Résultats des tests Maester (GitHub Actions)"
           $results = Invoke-Maester -PassThru
-
-          Send-MtTeamsMessage `
-            -MaesterResults $results `
-            -TeamChannelWebhookUri "${{ secrets.TEAMS_WEBHOOK_URL }}" `
-            -Subject "Résultats des tests Maester (GitHub Actions)"
