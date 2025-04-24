@@ -26,8 +26,11 @@ jobs:
           Install-Module Maester -Force -Scope CurrentUser
           Import-Module Maester
 
-          Connect-Maester
-
+          Connect-Maester `
+            -ClientId "${{ secrets.AZURE_CLIENT_ID }}" `
+            -TenantId "${{ secrets.AZURE_TENANT_ID }}" `
+            -ClientSecret "${{ secrets.AZURE_CLIENT_SECRET }}"
+      
           $results = Invoke-Maester -PassThru
 
           Send-MtTeamsMessage `
