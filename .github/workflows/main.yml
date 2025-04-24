@@ -26,6 +26,8 @@ jobs:
           Install-Module Maester -Force -Scope CurrentUser
           Import-Module Maester
 
+          Connect-Maester
+
           $results = Invoke-Maester -PassThru
 
           Send-MtTeamsMessage `
